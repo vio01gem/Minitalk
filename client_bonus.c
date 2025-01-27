@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 09:47:21 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/27 12:23:21 by hajmoham         ###   ########.fr       */
+/*   Created: 2025/01/27 12:07:28 by hajmoham          #+#    #+#             */
+/*   Updated: 2025/01/27 12:25:33 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void	msg_recieve(int signal)
+{
+	(void)signal;
+    ft_printf("The message is recieved\n");
+    exit(0);
+}
 
 void send_char(int pid, char c)
 {
@@ -44,9 +51,9 @@ int main(int ac, char **av)
         }
         send_char(pid, '\0');
         printf("%d\n", pid);
+        signal(SIGUSR1, msg_recieve);
     }
     else
         return ((void)ft_printf("Valid format: ./client <PID> <Message>\n"), 1);
     return 0;
 }
-

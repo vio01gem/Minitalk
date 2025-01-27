@@ -29,38 +29,38 @@ int	ft_atoi(const char *str)
 	return (sign * nb);
 }
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
+// void	ft_putchar_fd(char c, int fd)
+// {
+// 	write(fd, &c, 1);
+// }
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	if (n == INT_MIN)
-		write(fd, "-2147483648", 11);
-	else if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n = -n;
-		ft_putnbr_fd(n, fd);
-	}
-	else
-	{
-		if (n > 9)
-			ft_putnbr_fd(n / 10, fd);
-		ft_putchar_fd('0' + n % 10, fd);
-	}
-}
+// void	ft_putnbr_fd(int n, int fd)
+// {
+// 	if (n == INT_MIN)
+// 		write(fd, "-2147483648", 11);
+// 	else if (n < 0)
+// 	{
+// 		ft_putchar_fd('-', fd);
+// 		n = -n;
+// 		ft_putnbr_fd(n, fd);
+// 	}
+// 	else
+// 	{
+// 		if (n > 9)
+// 			ft_putnbr_fd(n / 10, fd);
+// 		ft_putchar_fd('0' + n % 10, fd);
+// 	}
+// }
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
+// void	ft_putstr_fd(char *s, int fd)
+// {
+// 	int	i;
 
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (s[i] != '\0')
+// 	{
+// 		write(fd, &s[i], 1);
+// 		i++;
+// 	}
+// }
 
