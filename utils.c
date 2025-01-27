@@ -51,3 +51,16 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putchar_fd('0' + n % 10, fd);
 	}
 }
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+

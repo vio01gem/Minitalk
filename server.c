@@ -12,10 +12,38 @@
 
 #include "minitalk.h"
 
-int main (int ac, char **av)
+void handle_signal(int sig)
 {
-	int	pid;
-	
-	pid = getpid();
-	ft_printf("%d\n", )
+    static char current_char = 0;
+    static int bit_count = 0;
+
+    if (sig == SIGUSR1)
+        current_char |= (1 << (7 - bit_count));
+    bit_count++;
+    if (bit_count == 8)
+    {
+        write(1, &current_char, 1);
+        if (current_char == '\0')
+            write(1, "\n", 1);
+        current_char = 0;
+        bit_count = 0;
+    }
 }
+
+int main(void)
+{
+    int pid;
+
+    pid = getpid();
+    // write(1, "Server PID: ", 12);
+
+    printf("Server PID: %d\n", pid);
+
+    signal(SIGUSR1, handle_signal);
+    signal(SIGUSR2, handle_signal);
+
+    while (1)
+        pause();
+    return 0;
+}
+
