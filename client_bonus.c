@@ -6,7 +6,7 @@
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:07:28 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/27 12:25:33 by hajmoham         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:05:47 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int main(int ac, char **av)
         signal(SIGUSR1, msg_recieve);
     }
     else
-        return ((void)ft_printf("Valid format: ./client <PID> <Message>\n"), 1);
+        return ((void)ft_printf("Valid format: ./client_bonus <PID> <Message>\n"), 1);
     return 0;
 }

@@ -6,7 +6,7 @@
 #    By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 15:29:46 by hajmoham          #+#    #+#              #
-#    Updated: 2025/01/27 17:44:56 by hajmoham         ###   ########.fr        #
+#    Updated: 2025/01/28 17:07:43 by hajmoham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,11 @@ bonus: $(BONUS_CLIENT_NAME) $(BONUS_SERVER_NAME)
 $(PRINTF):
 	$(MAKE) -C ./Printf
 
-$(BONUS_CLIENT_NAME): client_bonus.o utils_bonus.o $(PRINTF)
-	$(CC) $(CFLAGS) client_bonus.o utils_bonus.o $(PRINTF) -o $@
+$(BONUS_CLIENT_NAME): client_bonus.o utils.o $(PRINTF)
+	$(CC) $(CFLAGS) client_bonus.o utils.o $(PRINTF) -o $@
 	
-$(BONUS_SERVER_NAME): server_bonus.o utils_bonus.o $(PRINTF)
-	$(CC) $(CFLAGS) server_bonus.o utils_bonus.o $(PRINTF) -o $@
+$(BONUS_SERVER_NAME): server_bonus.o utils.o $(PRINTF)
+	$(CC) $(CFLAGS) server_bonus.o utils.o $(PRINTF) -o $@
 
 clean:
 	$(MAKE) clean -C ./Printf

@@ -6,7 +6,7 @@
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 09:47:21 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/27 12:23:21 by hajmoham         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:39:54 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int main(int ac, char **av)
             i++;
         }
         send_char(pid, '\0');
-        printf("%d\n", pid);
     }
     else
         return ((void)ft_printf("Valid format: ./client <PID> <Message>\n"), 1);
