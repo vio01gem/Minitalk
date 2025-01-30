@@ -6,51 +6,49 @@
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:33:19 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/30 10:59:18 by hajmoham         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:19:42 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void handle_signal(int sig)
+void	handle_signal(int sig)
 {
-    static char current_c;
-    static int bit_count;
+	static char	current_c;
+	static int	bit_count;
 
-    if (sig == SIGUSR1)
-        current_c |= (1 << bit_count); 
-        // current_c += (1 << bit_count); <- <even if u type it as (+) its gonna work the same way because we are just shifting 1>
-    bit_count++;
-    if (bit_count == 8)
-    {
-        if (current_c == '\0')
-            ft_printf("\n");
-        else
-            ft_printf("%c", current_c);
-        current_c = 0;
-        bit_count = 0;
-    }
+	if (sig == SIGUSR1)
+		current_c |= (1 << bit_count);
+	// current_c += (1 << bit_count); <- <even if u type it as (+) its gonna work the same way because we are just shifting 1>
+	bit_count++;
+	if (bit_count == 8)
+	{
+		if (current_c == '\0')
+			ft_printf("\n");
+		else
+			ft_printf("%c", current_c);
+		current_c = 0;
+		bit_count = 0;
+	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    int pid;
+	int	pid;
 
-    (void)av;
-    
-    if (ac != 1)
+	(void)av;
+	if (ac != 1)
 	{
 		write(1, "type ./server to get the pid", 28);
 		return (1);
 	}
-    pid = getpid();
-    ft_printf("Server PID: %d\n", pid);
-    signal(SIGUSR1, handle_signal);
-    signal(SIGUSR2, handle_signal);
-    while (1)
-    {
-        pause();
-    }
-    return 0;
+	pid = getpid();
+	ft_printf("Server PID: %d\n", pid);
+	signal(SIGUSR1, handle_signal);
+	signal(SIGUSR2, handle_signal);
+	while (1)
+	{
+		pause();
+	}
+	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 09:47:21 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/30 12:49:47 by hajmoham         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:17:22 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_atoi(const char *str)
 	return (sign * nb);
 }
 
-void send_char(int pid, char c)
+void	send_char(int pid, char c)
 {
 	int	bit;
 
@@ -49,44 +49,43 @@ void send_char(int pid, char c)
 	while (bit < 8)
 	{
 		if ((c & (1 << bit)))
-        {
-            if (kill(pid, SIGUSR1) == -1)
-            {
-                ft_printf("Invalid PID");
-                exit(1);
-            }
-        }
+		{
+			if (kill(pid, SIGUSR1) == -1)
+			{
+				ft_printf("Invalid PID");
+				exit(1);
+			}
+		}
 		else
-        {
-            if (kill(pid, SIGUSR2) == -1)
-            {
-                ft_printf("Invalid PID");
-                exit(1);
-            }
-        }
+		{
+			if (kill(pid, SIGUSR2) == -1)
+			{
+				ft_printf("Invalid PID");
+				exit(1);
+			}
+		}
 		usleep(200);
 		bit++;
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    int i;
-    int pid;
+	int	i;
+	int	pid;
 
-    if (ac == 3 && av[1][0] != '\0')
-    {
-        pid = ft_atoi(av[1]);
-        i = 0;
-        while (av[2][i] != '\0')
+	if (ac == 3 && av[1][0] != '\0')
+	{
+		pid = ft_atoi(av[1]);
+		i = 0;
+		while (av[2][i] != '\0')
 		{
-            send_char(pid, av[2][i]);
-            i++;
-        }
-        send_char(pid, '\0');
-    }
-    else
-        return ((void)ft_printf("Valid format: ./client <PID> <Message>\n"), 1);
-    return 0;
+			send_char(pid, av[2][i]);
+			i++;
+		}
+		send_char(pid, '\0');
+	}
+	else
+		return ((void)ft_printf("Valid format: ./client <PID> <Message>\n"), 1);
+	return (0);
 }
-
