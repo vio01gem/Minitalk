@@ -6,7 +6,7 @@
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 18:33:19 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/27 12:13:02 by hajmoham         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:59:18 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void handle_signal(int sig)
     static int bit_count;
 
     if (sig == SIGUSR1)
-        current_c |= (1 << bit_count);
+        current_c |= (1 << bit_count); 
+        // current_c += (1 << bit_count); <- <even if u type it as (+) its gonna work the same way because we are just shifting 1>
     bit_count++;
     if (bit_count == 8)
     {

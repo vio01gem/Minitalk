@@ -6,7 +6,7 @@
 #    By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/25 15:29:46 by hajmoham          #+#    #+#              #
-#    Updated: 2025/01/28 17:07:43 by hajmoham         ###   ########.fr        #
+#    Updated: 2025/01/28 18:07:33 by hajmoham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
-SRC = client.c server.c utils.c client_bonus.c server_bonus.c
+SRC = client.c server.c client_bonus.c server_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -33,11 +33,11 @@ all: $(CLIENT_NAME) $(SERVER_NAME)
 $(PRINTF):
 	$(MAKE) -C ./Printf
 
-$(CLIENT_NAME): client.o utils.o $(PRINTF)
-	$(CC) $(CFLAGS) client.o utils.o $(PRINTF) -o $@
+$(CLIENT_NAME): client.o $(PRINTF)
+	$(CC) $(CFLAGS) client.o $(PRINTF) -o $@
 	
-$(SERVER_NAME): server.o utils.o $(PRINTF)
-	$(CC) $(CFLAGS) server.o utils.o $(PRINTF) -o $@
+$(SERVER_NAME): server.o $(PRINTF)
+	$(CC) $(CFLAGS) server.o $(PRINTF) -o $@
 
 bonus: $(BONUS_CLIENT_NAME) $(BONUS_SERVER_NAME)
 
@@ -47,11 +47,11 @@ bonus: $(BONUS_CLIENT_NAME) $(BONUS_SERVER_NAME)
 $(PRINTF):
 	$(MAKE) -C ./Printf
 
-$(BONUS_CLIENT_NAME): client_bonus.o utils.o $(PRINTF)
-	$(CC) $(CFLAGS) client_bonus.o utils.o $(PRINTF) -o $@
+$(BONUS_CLIENT_NAME): client_bonus.o $(PRINTF)
+	$(CC) $(CFLAGS) client_bonus.o $(PRINTF) -o $@
 	
-$(BONUS_SERVER_NAME): server_bonus.o utils.o $(PRINTF)
-	$(CC) $(CFLAGS) server_bonus.o utils.o $(PRINTF) -o $@
+$(BONUS_SERVER_NAME): server_bonus.o $(PRINTF)
+	$(CC) $(CFLAGS) server_bonus.o $(PRINTF) -o $@
 
 clean:
 	$(MAKE) clean -C ./Printf

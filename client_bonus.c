@@ -1,22 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client_bonus.c                                     :+:      :+:    :+:   */
+/*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hajmoham <hajmoham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 12:07:28 by hajmoham          #+#    #+#             */
-/*   Updated: 2025/01/28 17:05:47 by hajmoham         ###   ########.fr       */
+/*   Created: 2025/01/27 09:47:21 by hajmoham          #+#    #+#             */
+/*   Updated: 2025/01/28 18:15:43 by hajmoham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	msg_recieve(int signal)
+int	ft_atoi(const char *str)
 {
-	(void)signal;
-    ft_printf("The message is recieved\n");
-    exit(0);
+	unsigned long long	nb;
+	int					sign;
+	int					i;
+
+	sign = 1;
+	nb = 0;
+	i = 0;
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = nb * 10 + str[i] - '0';
+		if (sign == -1 && nb >= LLONG_MAX)
+			return (0);
+		if (nb >= LLONG_MAX)
+			return (-1);
+		i++;
+	}
+	return (sign * nb);
 }
 
 void send_char(int pid, char c)
@@ -27,9 +49,21 @@ void send_char(int pid, char c)
 	while (bit < 8)
 	{
 		if ((c & (1 << bit)))
-			kill(pid, SIGUSR1);
+        {
+            if (kill(pid, SIGUSR1) == -1)
+            {
+                ft_printf("Invalid PID");
+                exit(1);
+            }
+        }
 		else
-			kill(pid, SIGUSR2);
+        {
+            if (kill(pid, SIGUSR2) == -1)
+            {
+                ft_printf("Invalid PID");
+                exit(1);
+            }
+        }
 		usleep(100);
 		bit++;
 	}
@@ -40,7 +74,7 @@ int main(int ac, char **av)
     int i;
     int pid;
 
-    if (ac == 3)
+    if (ac == 3 && av[1][0] != '\0')
     {
         pid = ft_atoi(av[1]);
         i = 0;
@@ -50,10 +84,9 @@ int main(int ac, char **av)
             i++;
         }
         send_char(pid, '\0');
-        printf("%d\n", pid);
-        signal(SIGUSR1, msg_recieve);
     }
     else
-        return ((void)ft_printf("Valid format: ./client_bonus <PID> <Message>\n"), 1);
+        return ((void)ft_printf("Valid format: ./client <PID> <Message>\n"), 1);
     return 0;
 }
+
